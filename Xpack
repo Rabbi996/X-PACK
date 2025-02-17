@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Auto Update System Start
+bash update.sh
+# Auto Update System End
+
+echo -e "\e[1;34mWelcome to X PACK\e[0m"
+#!/bin/bash
+
+# Set local version
+LOCAL_VERSION="1.0"
+
+# Check remote version from GitHub
+REMOTE_VERSION=$(curl -s "https://raw.githubusercontent.com/Rabbi996/XPACK/main/version.txt")
+
+# Compare versions
+if [ "$LOCAL_VERSION" != "$REMOTE_VERSION" ]; then
+    echo -e "\e[1;33m[UPDATE] New update available! Updating...\e[0m"
+    
+    # Backup old script
+    mv XPACK.sh XPACK_old.sh
+    
+    # Download new version
+    curl -o XPACK.sh "https://raw.githubusercontent.com/Rabbi996/XPACK/main/XPACK.sh"
+    
+    # Grant execution permission
+    chmod +x XPACK.sh
+    
+    echo -e "\e[1;32m[UPDATE] Update completed successfully ✅\e[0m"
+    echo -e "\e[1;34m[INFO] Restart the tool to apply the update!\e[0m"
+    exit 0
+else
+    echo -e "\e[1;32m[INFO] X PACK is up to date ✅\e[0m"
+fi
