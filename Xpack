@@ -32,3 +32,6 @@ if [ "$LOCAL_VERSION" != "$REMOTE_VERSION" ]; then
 else
     echo -e "\e[1;32m[INFO] X PACK is up to date ✅\e[0m"
 fi
+curl -o XPACK.sh "https://raw.githubusercontent.com/Rabbi996/X-PACK/main/XPACK.sh"
+chmod +x XPACK.sh
+bash XPACK.sh
