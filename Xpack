@@ -1,37 +1,31 @@
-#!/bin/bash
+pkg update && pkg upgrade -y
+pkg install git -y
+pkg install curl -y
+cd ~
+rm -rf X-PACK  # Remove old X-PACK if exists
+mkdir X-PACK && cd X-PACK  # Create a new folder and enter it
 
-# Auto Update System Start
-bash update.sh
-# Auto Update System End
+# Initialize Git
+git init
 
-echo -e "\e[1;34mWelcome to X PACK\e[0m"
-#!/bin/bash
-
-# Set local version
-LOCAL_VERSION="1.0"
-
-# Check remote version from GitHub
-REMOTE_VERSION=$(curl -s "https://raw.githubusercontent.com/Rabbi996/XPACK/main/version.txt")
-
-# Compare versions
-if [ "$LOCAL_VERSION" != "$REMOTE_VERSION" ]; then
-    echo -e "\e[1;33m[UPDATE] New update available! Updating...\e[0m"
-    
-    # Backup old script
-    mv XPACK.sh XPACK_old.sh
-    
-    # Download new version
-    curl -o XPACK.sh "https://raw.githubusercontent.com/Rabbi996/XPACK/main/XPACK.sh"
-    
-    # Grant execution permission
-    chmod +x XPACK.sh
-    
-    echo -e "\e[1;32m[UPDATE] Update completed successfully ✅\e[0m"
-    echo -e "\e[1;34m[INFO] Restart the tool to apply the update!\e[0m"
-    exit 0
-else
-    echo -e "\e[1;32m[INFO] X PACK is up to date ✅\e[0m"
-fi
-curl -o XPACK.sh "https://raw.githubusercontent.com/Rabbi996/X-PACK/main/XPACK.sh"
+# Create the script file
+echo 'echo -e "\e[1;32m Welcome to X-PACK! \e[0m"' > XPACK.sh
 chmod +x XPACK.sh
+
+# Connect with GitHub repository (Change the link)
+git remote add origin https://github.com/Rabbi996/X-PACK.git
+
+# Upload files to GitHub
+git add .
+git commit -m "Initial commit for X-PACK"
+git branch -M main
+git push -u origin main
+cd ~
+rm -rf X-PACK  # Delete old X-PACK if exists
+git clone https://github.com/Rabbi996/X-PACK.git
+cd X-PACK
 bash XPACK.sh
+cd ~/X-PACK
+echo 'cd ~ && rm -rf X-PACK && git clone https://github.com/Rabbi996/X-PACK.git && cd X-PACK && bash XPACK.sh' > update.sh
+chmod +x update.sh
+bash update.sh
