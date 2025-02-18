@@ -1,31 +1,8 @@
-pkg update && pkg upgrade -y
-pkg install git -y
-pkg install curl -y
-cd ~
-rm -rf X-PACK  # Remove old X-PACK if exists
-mkdir X-PACK && cd X-PACK  # Create a new folder and enter it
-
-# Initialize Git
-git init
-
-# Create the script file
-echo 'echo -e "\e[1;32m Welcome to X-PACK! \e[0m"' > XPACK.sh
-chmod +x XPACK.sh
-
-# Connect with GitHub repository (Change the link)
-git remote add origin https://github.com/Rabbi996/X-PACK.git
-
-# Upload files to GitHub
-git add .
-git commit -m "Initial commit for X-PACK"
-git branch -M main
-git push -u origin main
-cd ~
-rm -rf X-PACK  # Delete old X-PACK if exists
+pkg update && pkg upgrade
+pkg install git
 git clone https://github.com/Rabbi996/X-PACK.git
 cd X-PACK
-bash XPACK.sh
-cd ~/X-PACK
-echo 'cd ~ && rm -rf X-PACK && git clone https://github.com/Rabbi996/X-PACK.git && cd X-PACK && bash XPACK.sh' > update.sh
-chmod +x update.sh
-bash update.sh
+mv /sdcard/X-PACK/* .
+git add .
+git commit -m "First release of X PACK"
+git push origin main
